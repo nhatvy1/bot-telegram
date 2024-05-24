@@ -1,13 +1,15 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
-import { getBotToken } from 'nestjs-telegraf'
+import { BotUpdate } from './modules/bot/bot.update';
 
+let bot;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-
-  const bot = app.get(getBotToken())
-  app.use(bot.webhookCallback('/secret-path'))
-  
+  bot = app.get(BotUpdate);
   await app.listen(3000)
 }
-bootstrap()
+try {
+  bootstrap()
+} catch(e) {
+  console.log(e)
+}

@@ -5,7 +5,7 @@ import { COMMANDS } from './bot.action'
 
 @Update()
 export class BotUpdate {
-  constructor(@InjectBot('huynh') private readonly bot: Telegraf<TelegrafContext>) {
+  constructor(@InjectBot() private readonly bot: Telegraf<TelegrafContext>) {
     this.bot.telegram.setMyCommands(COMMANDS)
   }
 
@@ -24,8 +24,8 @@ export class BotUpdate {
     await ctx.reply('👍')
   }
 
-  @Hears(['/hi', 'hello', 'fox'])
+  @Hears(['hi', 'hello', 'fox'])
   async hears(@Ctx() ctx: TelegrafContext) {
-    await ctx.reply('Hey there')
+    await ctx.reply('Xao chìn 😛😛😛😛😛😛😛😛😛😛')
   }
 }

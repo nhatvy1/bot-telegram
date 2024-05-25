@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common'
-import { BotUpdate } from './bot.update'
+import { BotUpdate } from './bot.update';
 
 @Module({
-  imports: [BotUpdate],
-	exports: [BotUpdate]
+  providers: [BotUpdate]
 })
 export class BotModule {}

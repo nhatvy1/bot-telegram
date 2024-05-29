@@ -10,14 +10,6 @@ import { ConfigModule } from '@nestjs/config'
     ConfigModule.forRoot({
       isGlobal: true
     }),
-    TelegrafModule.forRootAsync({
-      botName: process.env.TELEGRAM_BOT_NAME,
-      useFactory: () => ({
-        token: process.env.TELEGRAM_BOT_TOKEN,
-        middlewares: [session()],
-        include: [BotModule]
-      })
-    }),
     BotModule
   ]
 })

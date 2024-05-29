@@ -1,7 +1,18 @@
-import { Update, Ctx, Start, Help, On, Hears, InjectBot } from 'nestjs-telegraf'
+import {
+  Update,
+  Ctx,
+  Start,
+  Help,
+  On,
+  Hears,
+  InjectBot,
+  Command,
+  Message
+} from 'nestjs-telegraf'
 import { TelegrafContext } from 'src/types/telegraf-context.interface'
 import { Telegraf } from 'telegraf'
 import { COMMANDS } from './bot.action'
+import { ReverseTextPipe } from 'src/types/pipe/reverse-text.pipe'
 
 @Update()
 export class BotUpdate {
@@ -20,8 +31,21 @@ export class BotUpdate {
   }
 
   @On('sticker')
-  async on(@Ctx() ctx: TelegrafContext) {
+  async onSticker(@Ctx() ctx: TelegrafContext) {
     await ctx.reply('👍')
+  }
+
+  @On(['text'])
+  async onTextMessage(
+    @Message('text') text: string,
+    @Ctx() ctx: TelegrafContext
+  ) {
+    let message = ''
+    if(text === 'abc') {
+      message = 'Xin chào các bạn'
+    }
+    console.log('adfsafdsf')
+    // await ctx.reply(message)
   }
 
   @Hears(['hi', 'hello', 'fox'])

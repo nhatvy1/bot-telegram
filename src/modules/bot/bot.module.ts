@@ -10,7 +10,6 @@ import { session } from 'telegraf'
       useFactory: () => ({
         token: process.env.TELEGRAM_BOT_TOKEN,
         middlewares: [session()],
-        // include: [BotModule]
       })
     })
   ],

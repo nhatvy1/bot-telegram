@@ -48,7 +48,7 @@ export class BotUpdate {
 
   @Hears(['hi', 'hello', 'fox'])
   async hears(@Ctx() ctx: TelegrafContext) {
-    await ctx.reply('Xao chìn 😛😛😛😛😛😛😛😛😛😛')
+    await ctx.reply('Xin chào, Tôi là Son Goku Bot 🐲Dragon Ball 🏀')
   }
 
   @Command('help')
@@ -59,8 +59,8 @@ export class BotUpdate {
   @Command(COMMANDS.map((item) => item.description))
   async sendImage(@Ctx() ctx: TelegrafContext, @Message('text') text: string) {
     try {
-      const menuItem = listMenu.find(item => item.text === text)
-      if(menuItem) {
+      const menuItem = listMenu.find((item) => item.text === text)
+      if (menuItem) {
         await this.imageService.editImage(menuItem.linkImage)
         const inputFile = { source: './public/output_image.jpg' }
         await ctx.telegram.sendPhoto(ctx.from.id, inputFile)
@@ -69,6 +69,32 @@ export class BotUpdate {
       }
     } catch (e) {
       console.log(e)
+      await ctx.reply('Đã có lỗi xảy ra')
+    }
+  }
+
+  @Command('chat')
+  async sendNotifications(@Ctx() ctx: TelegrafContext) {
+    try {
+      await ctx.telegram.sendPhoto(
+        ctx.from.id,
+        'https://tranhdecors.com/wp-content/uploads/edd/2023/11/Banner-chuc-tet-Nguyen-Dan-2024.jpg',
+        {
+          parse_mode: 'HTML',
+          caption: 'Hello world',
+          reply_markup: {
+            inline_keyboard: [
+              [
+                { text: 'Trang đầu', url: 'www.google.com' },
+                { text: 'Trang sau', url: 'www.facebook.com' }
+              ],
+              [{ text: 'Liên hệ quảng cáo', url: 'www.youtube.com' }],
+              [{ text: 'Vị trí', url: 'www.tiktok.com' }]
+            ]
+          }
+        }
+      )
+    } catch (e) {
       await ctx.reply('Đã có lỗi xảy ra')
     }
   }

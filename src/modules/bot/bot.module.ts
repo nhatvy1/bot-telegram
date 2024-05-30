@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { BotUpdate } from './bot.update'
 import { TelegrafModule } from 'nestjs-telegraf'
 import { session } from 'telegraf'
+import { ImageModule } from '../image/image.module'
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { session } from 'telegraf'
         token: process.env.TELEGRAM_BOT_TOKEN,
         middlewares: [session()],
       })
-    })
+    }),
+    ImageModule
   ],
   providers: [BotUpdate]
 })

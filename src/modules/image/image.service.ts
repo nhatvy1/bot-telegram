@@ -2,11 +2,15 @@ import { Injectable } from '@nestjs/common'
 import { createCanvas, loadImage } from 'canvas'
 import * as fs from 'fs'
 import * as moment from 'moment'
+import * as path from 'path'
 
 @Injectable()
 export class ImageService {
   async editImage(urlFileLocal: string) {
     // Create a canvas and set its dimensions
+
+    // Get absolute path
+    // const absolutePath = path.resolve(__dirname, urlFileLocal)
 
     // Load the image onto the canvas
     loadImage(urlFileLocal)

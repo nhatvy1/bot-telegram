@@ -12,7 +12,7 @@ import { FileInterceptor } from '@nestjs/platform-express'
 import { diskStorage } from 'multer'
 import { extname } from 'path'
 import { FileService } from './file.service'
-import { Response } from 'src/types/response.type'
+import { Response } from 'src/utils/response.type'
 
 export const storage = diskStorage({
   destination: './uploads',
@@ -49,9 +49,9 @@ export class FileController {
   @Get()
   getFile() {
     try {
-
+      return { msg: 'dsad ' }
     } catch(e) {
-      
+      throw e
     }
   }
 }

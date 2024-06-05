@@ -21,11 +21,13 @@ export class BotUpdate {
     private readonly imageService: ImageService
   ) {
     this.bot.telegram.setMyCommands(COMMANDS)
+    this.bot.catch((err) => console.log('Check: ', err));
   }
 
   @Start()
-  async start(@Ctx() ctx: TelegrafContext) {
-    await ctx.reply('Welcome')
+  async onStart() {
+    const me = await this.bot.telegram.getMe();
+    return `Hey, I'm ${me.first_name}`;
   }
 
   @Help()

@@ -16,7 +16,7 @@ import { LoggerMiddleware } from './logger.middeware'
       useFactory: typeormConfig
     }),
     FileModule,
-    BotModule,
+    // BotModule,
     ImageModule
   ],
   providers: [LoggerMiddleware]

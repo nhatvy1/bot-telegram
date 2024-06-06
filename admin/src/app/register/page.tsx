@@ -72,14 +72,14 @@ const Register2 = () => (
                   </Typography>
                   <Typography
                     component={Link}
-                    href="/authentication/login"
+                    href="/login"
                     fontWeight="500"
                     sx={{
                       textDecoration: "none",
                       color: "primary.main",
                     }}
                   >
-                    Sign In
+                    Login
                   </Typography>
                 </Stack>
               }

@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { FileModule } from './modules/file/file.module'
 import typeormConfig from './database/typeorm.config'
 import { LoggerMiddleware } from './logger.middeware'
+import { UserModule } from './modules/user/user.module'
+import { AuthModule } from './modules/auth/auth.module'
 
 @Module({
   imports: [
@@ -17,7 +19,9 @@ import { LoggerMiddleware } from './logger.middeware'
     }),
     FileModule,
     // BotModule,
-    ImageModule
+    ImageModule,
+    UserModule,
+    AuthModule
   ],
   providers: [LoggerMiddleware]
 })

@@ -3,7 +3,7 @@ import { HttpStatus } from "@nestjs/common"
 interface ResponseType <T>{
   message: string
   statusCode: HttpStatus,
-  result: T
+  result: T | undefined
 }
 export const Response = <T>({ message, statusCode, result}: ResponseType<T>) => {
   return {

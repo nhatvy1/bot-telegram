@@ -1,11 +1,12 @@
-import { Column, CreateDateColumn, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 export enum Status {
   ACTIVE = 1,
   INACTIVE = 0,
-  BLOCK = -1,
+  BLOCK = -1
 }
 
+@Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number
@@ -25,8 +26,8 @@ export class User {
   })
   avatar: string
 
-	@Column({ type: Number, default: Status.INACTIVE })
-  status: number
+  @Column({ type: 'enum', enum: Status, default: Status.INACTIVE })
+  status: Status
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date

@@ -1,14 +1,18 @@
-import { HttpStatus } from "@nestjs/common"
+import { HttpStatus } from '@nestjs/common'
 
-interface ResponseType <T>{
+interface ResponseType<T> {
   message: string
-  statusCode: HttpStatus,
+  statusCode: HttpStatus
   result?: T
 }
-export const Response  = <T>({ statusCode, message, result}: ResponseType<T>)=> {
+export const Response = <T>({
+  statusCode,
+  message,
+  result
+}: ResponseType<T>) => {
   return {
     message,
     statusCode,
-    result: result || {}
+    result: result || {} || undefined
   }
 }

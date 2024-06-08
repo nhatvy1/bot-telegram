@@ -21,15 +21,39 @@ export class PermissionService {
     role: Role
   }) {
     try {
-			console.log('Subject: ', subject)
-			console.log('Action: ', action)
-      const newPermissions = this.permissionRepository.create({
-        action,
-        subject
+      const permission = await this.permissionRepository.findOne({
+        where: {
+          action: action,
+          subject: subject,
+          roles: { id: role.id }
+        }
       })
-			newPermissions.roles = [role]
-			await this.permissionRepository.save(newPermissions)
-			return newPermissions
+      if (permission) {
+        return permission
+      } else {
+        const checkExistPermission = await this.permissionRepository.findOne({
+          where: {
+            action: action,
+            subject: subject
+          },
+          relations: { roles: true }
+        })
+        if (checkExistPermission) {
+          checkExistPermission.roles = [
+            ...(checkExistPermission?.roles || []),
+            role
+          ]
+          return this.permissionRepository.save(checkExistPermission)
+        } else {
+          const newPermission = this.permissionRepository.create({
+            action: action,
+            subject: subject
+          })
+          newPermission.roles = [...(newPermission?.roles || []), role]
+          await this.permissionRepository.save(newPermission)
+          return newPermission
+        }
+      }
     } catch (e) {
       throw e
     }

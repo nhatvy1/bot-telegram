@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Role } from '../role/role.entity'
 
 export enum Status {
   ACTIVE = 1,
@@ -31,4 +32,8 @@ export class User {
 
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date
+
+  @ManyToOne(()=> Role, (role)=> role.id)
+  @JoinColumn({ name: 'role' })
+  role: Role
 }

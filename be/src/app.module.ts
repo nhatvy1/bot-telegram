@@ -8,6 +8,8 @@ import typeormConfig from './database/typeorm.config'
 import { LoggerMiddleware } from './logger.middeware'
 import { UserModule } from './modules/user/user.module'
 import { AuthModule } from './modules/auth/auth.module'
+import { RoleModule } from './modules/role/role.module'
+import { PermissionModule } from './modules/permission/permission.module'
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { AuthModule } from './modules/auth/auth.module'
     // BotModule,
     ImageModule,
     UserModule,
+    RoleModule, 
+    PermissionModule,
     AuthModule
   ],
   providers: [LoggerMiddleware]

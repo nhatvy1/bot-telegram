@@ -1,12 +1,12 @@
 import { IsNotEmpty, IsOptional } from "class-validator";
 
 export class CreateFileDto {
-  @IsNotEmpty({ message: 'Vui lòng nhập tiêu đề file'})
+  @IsNotEmpty({ message: 'Please enter file title' })
   name: string
 
-  @IsOptional({ message: 'Vui lòng chọn chế độ hiển thị' })
+  @IsOptional({ message: 'Please select display mode' })
   isShow: boolean = true
 
-  @IsNotEmpty({ message: 'Vui lòng nhập dánh sách từ khóa' })
+  @IsNotEmpty({ message: 'Please enter your keywords' })
   keywords: string[]
 }

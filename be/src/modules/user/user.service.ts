@@ -10,11 +10,14 @@ import { CreateUserDto } from '../auth/dto/create.user.dto'
 import { Hash } from 'src/utils/hash'
 import { LoginDto } from '../auth/dto/login.dto'
 import { UpdateUserDto } from './dto/update.user.dto'
+import { RoleService } from '../role/role.service'
+import { roles } from 'src/utils/constant'
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+    private readonly roleService: RoleService
   ) {}
 
   async getUserById(id: number) {
@@ -40,11 +43,14 @@ export class UserService {
       }
 
       const hashPassword = Hash.generateHash(createUser.password)
-      // find Customer Role
+      const findCustomerRole = await this.roleService.getRoleByName(
+        roles.CUSTOMER
+      )
 
       const userToCreate = {
         ...createUser,
-        password: hashPassword
+        password: hashPassword,
+        role: findCustomerRole
       }
       const user = this.userRepository.create(userToCreate)
       await this.userRepository.save(user)

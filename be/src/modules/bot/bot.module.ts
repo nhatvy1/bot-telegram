@@ -3,8 +3,6 @@ import { BotUpdate } from './bot.update'
 import { TelegrafModule } from 'nestjs-telegraf'
 import { session } from 'telegraf'
 import { ImageModule } from '../image/image.module'
-import { tokenTelegram } from 'src/utils/constant'
-import * as https from 'https'
 
 @Module({
   imports: [

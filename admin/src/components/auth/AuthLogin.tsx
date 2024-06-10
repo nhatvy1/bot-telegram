@@ -11,6 +11,9 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { login } from '@/app/actions/login'
+import { TextField } from '@mui/material'
+import theme from '@/theme/theme'
+import CustomInput from '@/components/forms/theme-elements/CustomTextField'
 
 interface loginType {
   title?: string
@@ -24,13 +27,14 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<any>()
+  } = useForm<ILogin>()
 
-  const onSubmit: SubmitHandler<any> = async(data: any)=> {
+  const onSubmit: SubmitHandler<ILogin> = async (data: ILogin) => {
     try {
-      const res = await login(data)
-      console.log('Check res: ', res)
-    } catch(e) {
+      console.log('Check data: ', data)
+      // const res = await login(data)
+      // console.log('Check res: ', res)
+    } catch (e) {
       toast.error('Login failed')
     } finally {
       setIsLoading(true)
@@ -47,22 +51,37 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
 
       {subtext}
 
-      <Stack component='form'>
+      <Stack component='form' onSubmit={handleSubmit(onSubmit)} method='POST'>
         <Box>
           <Typography
             variant='subtitle1'
             fontWeight={600}
             component='label'
-            htmlFor='username'
+            htmlFor='email'
             mb='5px'
           >
-            Username
+            Email
           </Typography>
-          <CustomTextField
+          <CustomInput />
+          {/* <CustomTextField
+            type='text'
             variant='outlined'
+            placeholder='Enter your password'
             fullWidth
-            placeholder='Enter your username'
-          />
+            {...register('email', {
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Please enter a valid email'
+              },
+              required: {
+                value: true,
+                message: 'Please enter your email'
+              }
+            })}
+          /> */}
+          <Typography sx={{ color: 'red' }}>
+            {errors?.email?.message}
+          </Typography>
         </Box>
         <Box mt='25px'>
           <Typography
@@ -74,12 +93,21 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
           >
             Password
           </Typography>
-          <CustomTextField
+          {/* <CustomTextField
             type='password'
             variant='outlined'
             placeholder='Enter your password'
             fullWidth
-          />
+            {...register('password', {
+              required: {
+                value: true,
+                message: 'Please enter your password'
+              }
+            })}
+          /> */}
+          <Typography sx={{ color: 'red' }}>
+            {errors?.password?.message}
+          </Typography>
         </Box>
         <Stack
           justifyContent='space-between'

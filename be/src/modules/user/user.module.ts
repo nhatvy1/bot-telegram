@@ -5,9 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { AccessTokenStrategy } from 'src/strategies/access-token.stategy';
 import { RefreshTokenStrategy } from 'src/strategies/refresh-token.stategy';
+import { RoleModule } from '../role/role.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [TypeOrmModule.forFeature([User]), RoleModule],
   controllers: [UserController],
   providers: [UserService, AccessTokenStrategy, RefreshTokenStrategy],
   exports: [UserService]

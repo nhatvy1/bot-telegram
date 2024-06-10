@@ -62,6 +62,7 @@ export class AuthService {
         user.fullName
       )
 
+      delete user.password
 			return { user, access_token, refresh_token }
     } catch (e) {
       throw e

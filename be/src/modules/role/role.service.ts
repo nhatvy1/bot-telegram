@@ -84,10 +84,10 @@ export class RoleService {
     }
   }
 
-  async getRoleByName() {
+  async getRoleByName(name: string) {
     try {
       const role = await this.roleRepository.findOne({
-        where: { name: 'admin' },
+        where: { name: name },
         relations: { permissions: true }
       })
       if (!role) {
@@ -95,6 +95,30 @@ export class RoleService {
       }
       return role
     } catch (e) {
+      throw e
+    }
+  }
+
+  async initRole() {
+    try {
+      const customer = this.roleRepository.create({
+        name: 'customer',
+        description: 'Người dùng' 
+      })
+      await this.roleRepository.save(customer)
+
+      const superAdmin = this.roleRepository.create({
+        name: 'admin',
+        description: 'Super Admin'
+      })
+      await this.roleRepository.save(superAdmin)
+      await this.permissionService.createPermission({
+        action: actionEnum.MANAGE,
+        subject: 'all',
+        role: superAdmin
+      })
+      return { message: 1 }
+    } catch(e) {
       throw e
     }
   }

@@ -51,7 +51,7 @@ export class RoleController {
   @Get()
   async getRoleByName() {
     try {
-      const result = await this.roleService.getRoleByName()
+      const result = await this.roleService.getRoleByName('customer')
       return Response({
         message: 'Get role by name successfully',
         statusCode: HttpStatus.OK,
@@ -61,4 +61,18 @@ export class RoleController {
       throw e
     }
   }
+
+  @Get('init-role') 
+  async initRole() {
+    try {
+      const result = await this.roleService.initRole()
+      return Response({
+        message: 'Init role successfully',
+        statusCode: HttpStatus.OK,
+        result
+      })
+    } catch(e) {
+      throw e
+    }
+  } 
 }

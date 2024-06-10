@@ -98,4 +98,13 @@ export class RoleService {
       throw e
     }
   }
+
+  async getRoleById(id: number) {
+    try {
+      const role = await this.roleRepository.findOneBy({ id })
+      return role
+    } catch(e) {
+      throw e
+    }
+  }
 }

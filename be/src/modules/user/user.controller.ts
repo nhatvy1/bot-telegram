@@ -16,6 +16,8 @@ import { Authentication } from 'src/decorators/authentication.decorator'
 import { Response } from 'src/types/response.type'
 import { UpdateUserDto } from './dto/update.user.dto'
 import { FilterUserDto } from './dto/filter.user.dto'
+import { Authorization } from 'src/decorators/authorization.decorator'
+import { actionEnum } from '../permission/permission.entity'
 
 @Controller('user')
 @Authentication()
@@ -71,6 +73,7 @@ export class UserController {
   }
 
   @Get('')
+  @Authorization('user', actionEnum.READ)
   async getListUsers(@Query() filterUser: FilterUserDto) {
     try {
        const result = await this.userService.getListUsers(filterUser)

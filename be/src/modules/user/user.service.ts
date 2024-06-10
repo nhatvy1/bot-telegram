@@ -133,4 +133,16 @@ export class UserService {
       throw e
     }
   }
+
+  async checkPermission(id: number) {
+    try {
+      const user = await this.userRepository.findOne({
+        where: { id },
+        relations: { role: true }
+      })
+      return user
+    } catch(e) {
+      throw e
+    }
+  }
 }

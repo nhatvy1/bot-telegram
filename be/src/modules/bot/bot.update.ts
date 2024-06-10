@@ -40,14 +40,6 @@ export class BotUpdate {
     await ctx.reply('👍')
   }
 
-  // @On(['text'])
-  // async onTextMessage(
-  //   @Message('text') text: string,
-  //   @Ctx() ctx: TelegrafContext
-  // ) {
-  //   await ctx.reply('Xin chào nhật vỹ huỳnh')
-  // }
-
   @Hears(['hi', 'hello', 'fox'])
   async hears(@Ctx() ctx: TelegrafContext) {
     await ctx.reply('Xin chào, Tôi là Son Goku Bot 🐲Dragon Ball 🏀')

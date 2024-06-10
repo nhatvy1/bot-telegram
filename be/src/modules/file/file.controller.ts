@@ -46,10 +46,10 @@ export class FileController {
     }
   }
 
-  @Get()
-  getFile() {
+  @Get('')
+  async getFile() {
     try {
-      return { msg: 'dsad ' }
+      const result = await this.fileService.getFile()
     } catch(e) {
       throw e
     }

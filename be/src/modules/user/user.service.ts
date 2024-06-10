@@ -4,12 +4,13 @@ import {
   NotFoundException
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { ILike, Repository } from 'typeorm'
 import { User } from './user.entity'
 import { CreateUserDto } from '../auth/dto/create.user.dto'
 import { Hash } from 'src/utils/hash'
 import { LoginDto } from '../auth/dto/login.dto'
 import { UpdateUserDto } from './dto/update.user.dto'
+import { FilterUserDto } from './dto/filter.user.dto'
 
 @Injectable()
 export class UserService {
@@ -102,6 +103,32 @@ export class UserService {
         throw new NotFoundException(`User not found`)
       }
       return user
+    } catch (e) {
+      throw e
+    }
+  }
+
+  async getListUsers(filterUser: FilterUserDto) {
+    try {
+      const { limit, page, search } = filterUser
+      const skip = (page - 1) * limit
+
+      const [list, totalResults] = await this.userRepository.findAndCount({
+        order: { createdAt: 'DESC' },
+        take: limit,
+        skip: skip,
+        where: [
+          { fullName: ILike(`%${search}%`) }, // Search within name
+          { email: ILike(`%${search}%`) } // Search within email
+        ]
+      })
+      
+      return {
+        result: list,
+        totalResults: totalResults,
+        limit: limit,
+        page: page
+      }
     } catch (e) {
       throw e
     }

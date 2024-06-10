@@ -1,16 +1,17 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Checkbox from '@mui/material/Checkbox'
 import FormGroup from '@mui/material/FormGroup'
 import Link from 'next/link'
-import CustomTextField from '@/components/forms/theme-elements/CustomTextField'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { login } from '@/app/actions/login'
+import { ErrorMessage } from '@hookform/error-message'
 
 interface loginType {
   title?: string
@@ -24,13 +25,14 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<any>()
+  } = useForm<ILogin>()
 
-  const onSubmit: SubmitHandler<any> = async(data: any)=> {
+  const onSubmit: SubmitHandler<ILogin> = async (data: ILogin) => {
     try {
-      const res = await login(data)
-      console.log('Check res: ', res)
-    } catch(e) {
+      console.log('Check data: ', data)
+      // const res = await login(data)
+      // console.log('Check res: ', res)
+    } catch (e) {
       toast.error('Login failed')
     } finally {
       setIsLoading(true)
@@ -47,7 +49,7 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
 
       {subtext}
 
-      <Stack component='form'>
+      <Stack component='form' onSubmit={handleSubmit(onSubmit)}>
         <Box>
           <Typography
             variant='subtitle1'
@@ -56,12 +58,31 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
             htmlFor='username'
             mb='5px'
           >
-            Username
+            Email
           </Typography>
-          <CustomTextField
+          <TextField
             variant='outlined'
             fullWidth
-            placeholder='Enter your username'
+            placeholder='Enter your email address'
+            {...register('email', {
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Invaid email address'
+              },
+              required: {
+                value: true,
+                message: 'Please enter your email address'
+              }
+            })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name='email'
+            render={({ message }) => (
+              <Typography component='span' style={{ color: 'red' }}>
+                {message}
+              </Typography>
+            )}
           />
         </Box>
         <Box mt='25px'>
@@ -74,11 +95,26 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
           >
             Password
           </Typography>
-          <CustomTextField
+          <TextField
             type='password'
             variant='outlined'
             placeholder='Enter your password'
             fullWidth
+            {...register('password', {
+              required: {
+                value: true,
+                message: 'Please enter your password'
+              }
+            })}
+          />
+          <ErrorMessage
+            errors={errors}
+            name='password'
+            render={({ message }) => (
+              <Typography component='span' style={{ color: 'red' }}>
+                {message}
+              </Typography>
+            )}
           />
         </Box>
         <Stack

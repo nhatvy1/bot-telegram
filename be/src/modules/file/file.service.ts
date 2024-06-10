@@ -28,4 +28,13 @@ export class FileService {
       throw e
     }
   }
+
+  async getFile() {
+    try {
+      const file = await this.fileRepository.find()
+      return file
+    } catch(e) {
+      throw e
+    }
+  }
 }

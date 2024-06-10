@@ -1,19 +1,17 @@
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import FormControlLabel from '@mui/material/FormControlLabel'
+import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Checkbox from '@mui/material/Checkbox'
 import FormGroup from '@mui/material/FormGroup'
 import Link from 'next/link'
-import CustomTextField from '@/components/forms/theme-elements/CustomTextField'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { login } from '@/app/actions/login'
-import { TextField } from '@mui/material'
-import theme from '@/theme/theme'
-import CustomInput from '@/components/forms/theme-elements/CustomTextField'
+import { ErrorMessage } from '@hookform/error-message'
 
 interface loginType {
   title?: string
@@ -62,26 +60,30 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
           >
             Email
           </Typography>
-          <CustomInput />
-          {/* <CustomTextField
-            type='text'
+          <TextField
             variant='outlined'
-            placeholder='Enter your password'
             fullWidth
+            placeholder='Enter your email address'
             {...register('email', {
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Please enter a valid email'
+                message: 'Invaid email address'
               },
               required: {
                 value: true,
-                message: 'Please enter your email'
+                message: 'Please enter your email address'
               }
             })}
-          /> */}
-          <Typography sx={{ color: 'red' }}>
-            {errors?.email?.message}
-          </Typography>
+          />
+          <ErrorMessage
+            errors={errors}
+            name='email'
+            render={({ message }) => (
+              <Typography component='span' style={{ color: 'red' }}>
+                {message}
+              </Typography>
+            )}
+          />
         </Box>
         <Box mt='25px'>
           <Typography
@@ -93,7 +95,7 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
           >
             Password
           </Typography>
-          {/* <CustomTextField
+          <TextField
             type='password'
             variant='outlined'
             placeholder='Enter your password'
@@ -104,10 +106,16 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
                 message: 'Please enter your password'
               }
             })}
-          /> */}
-          <Typography sx={{ color: 'red' }}>
-            {errors?.password?.message}
-          </Typography>
+          />
+          <ErrorMessage
+            errors={errors}
+            name='password'
+            render={({ message }) => (
+              <Typography component='span' style={{ color: 'red' }}>
+                {message}
+              </Typography>
+            )}
+          />
         </Box>
         <Stack
           justifyContent='space-between'

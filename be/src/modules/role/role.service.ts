@@ -103,7 +103,7 @@ export class RoleService {
     try {
       const customer = this.roleRepository.create({
         name: 'customer',
-        description: 'Người dùng' 
+        description: 'Người dùng'
       })
       await this.roleRepository.save(customer)
 
@@ -118,7 +118,16 @@ export class RoleService {
         role: superAdmin
       })
       return { message: 1 }
-    } catch(e) {
+    } catch (e) {
+      throw e
+    }
+  }
+  
+  async getRoleById(id: number) {
+    try {
+      const role = await this.roleRepository.findOneBy({ id })
+      return role
+    } catch (e) {
       throw e
     }
   }

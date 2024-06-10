@@ -16,25 +16,25 @@ const Menuitems = [
     id: uniqueId(),
     title: 'Trang chủ',
     icon: IconLayoutDashboard,
-    href: '/'
+    href: '/dashboard'
   },
   {
     id: uniqueId(),
     title: 'Người dùng',
     icon: IconUser,
-    href: '/user-management'
+    href: '/dashboard/user-management'
   },
   {
     id: uniqueId(),
     title: 'Phân quyền',
     icon: IconShieldLock,
-    href: '/role-management'
+    href: '/dashboard/role-management'
   },
   {
     id: uniqueId(),
     title: 'Tập tin (File)',
     icon: IconFile,
-    href: '/file-management'
+    href: '/dashboard/file-management'
   },
 ]
 

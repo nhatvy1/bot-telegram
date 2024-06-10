@@ -20,7 +20,7 @@ import { PermissionModule } from './modules/permission/permission.module'
       useFactory: typeormConfig
     }),
     FileModule,
-    BotModule,
+    // BotModule,
     ImageModule,
     UserModule,
     RoleModule, 

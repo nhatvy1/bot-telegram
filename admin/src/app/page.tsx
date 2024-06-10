@@ -1,6 +1,6 @@
 const Page = ()=> {
     return (
-        <div>dsd</div>
+        <div>Page</div>
     )
 }
 

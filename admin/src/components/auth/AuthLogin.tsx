@@ -12,6 +12,8 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { login } from '@/app/actions/login'
 import { ErrorMessage } from '@hookform/error-message'
+import authApiRequest from '@/app/apiRequest/auth'
+import { useRouter } from 'next/navigation'
 
 interface loginType {
   title?: string
@@ -20,6 +22,7 @@ interface loginType {
 }
 
 const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
+  const router  = useRouter()
   const [loading, setIsLoading] = useState(false)
   const {
     register,
@@ -29,9 +32,12 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
 
   const onSubmit: SubmitHandler<ILogin> = async (data: ILogin) => {
     try {
-      console.log('Check data: ', data)
-      // const res = await login(data)
-      // console.log('Check res: ', res)
+      const res = await login(data)
+      console.log(res)
+      await authApiRequest.auth({
+        sessionToken: res.result.access_token
+      })
+      router.push('/dashboard')
     } catch (e) {
       toast.error('Login failed')
     } finally {

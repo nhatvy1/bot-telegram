@@ -22,7 +22,7 @@ interface loginType {
 }
 
 const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
-  const router  = useRouter()
+  const router = useRouter()
   const [loading, setIsLoading] = useState(false)
   const {
     register,
@@ -32,16 +32,17 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
 
   const onSubmit: SubmitHandler<ILogin> = async (data: ILogin) => {
     try {
+      setIsLoading(true)
       const res = await login(data)
-      console.log(res)
       await authApiRequest.auth({
         sessionToken: res.result.access_token
       })
       router.push('/dashboard')
-    } catch (e) {
-      toast.error('Login failed')
+      toast.success(res.message || 'Login successfully')
+    } catch (e: any) {
+      toast.error(e.message)
     } finally {
-      setIsLoading(true)
+      setIsLoading(false)
     }
   }
 

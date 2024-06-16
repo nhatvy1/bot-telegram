@@ -1,8 +1,12 @@
 import { BACKEND_URL } from './constant'
+import { HttpError } from './error'
 
 type CustomOptions = Omit<RequestInit, 'method'> & {
   baseUrl?: string | undefined
 }
+
+const NOTFOUND_ERROR_STATUS = 404
+const AUTHENTICATION_ERROR_STATUS = 401
 
 class SessionToken {
   private token = ''
@@ -19,6 +23,7 @@ class SessionToken {
     this.token = token
   }
 }
+
 export const clientSessionToken = new SessionToken()
 
 const request = async <Response>(
@@ -49,6 +54,11 @@ const request = async <Response>(
   })
 
   const payload: Response = await res.json()
+
+  if (!res.ok) {
+    throw new HttpError({ status: 422, payload })
+  }
+
   return payload
 }
 

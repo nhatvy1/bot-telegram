@@ -106,7 +106,7 @@ export class UserService {
         select: ['id', 'email', 'password']
       })
       if (!user) {
-        throw new NotFoundException(`User not found`)
+        throw new NotFoundException(`Email address or password incorrect`)
       }
       return user
     } catch (e) {

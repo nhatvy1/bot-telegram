@@ -14,6 +14,13 @@ const MuiTable = ({ listUsers, columns }: Props) => {
       columns={columns}
       pageSizeOptions={[5, 10]}
       hideFooterPagination
+      rowSelection={false}
+      sx={{
+        '& .MuiDataGrid-cell': {
+          display: 'flex',
+          alignItems: 'center'
+        }
+      }}
     />
   )
 }

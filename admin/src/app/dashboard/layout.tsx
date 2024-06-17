@@ -14,10 +14,11 @@ const MainWrapper = styled('div')(() => ({
 
 const PageWrapper = styled('div')(() => ({
   display: 'flex',
-  flexGrow: 1,
+  flex: 1,
   flexDirection: 'column',
   zIndex: 1,
-  backgroundColor: 'transparent'
+  backgroundColor: 'transparent',
+  overflow: 'auto'
 }))
 
 export default function RootLayout({ children }: { children: ReactNode }) {

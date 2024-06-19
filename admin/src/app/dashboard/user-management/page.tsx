@@ -9,7 +9,6 @@ const UserManagement = async () => {
   return (
     <Box sx={{ width: '100%' }}>
       <title>User Management</title>
-      <Typography variant='h1' sx={{ fontSize: '24px' }}>User Management</Typography>
       <Box>
         <TableUser listUsers={data?.result?.result}/>
       </Box>

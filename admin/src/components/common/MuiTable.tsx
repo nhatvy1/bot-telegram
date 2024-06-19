@@ -19,7 +19,14 @@ const MuiTable = ({ listUsers, columns }: Props) => {
         '& .MuiDataGrid-cell': {
           display: 'flex',
           alignItems: 'center'
-        }
+        },
+        '& .MuiDataGrid-cell:focus-within, & .MuiDataGrid-cell:focus': {
+          outline: 'none !important'
+        },
+        '& .MuiDataGrid-columnHeader:focus-within, & .MuiDataGrid-columnHeader:focus':
+          {
+            outline: 'none !important'
+          }
       }}
     />
   )

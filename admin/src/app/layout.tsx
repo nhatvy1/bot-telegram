@@ -4,6 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { baselightTheme } from '@/theme/DefaultColors'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import './global.css'
 
 export default function RootLayout({
   children

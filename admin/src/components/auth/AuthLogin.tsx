@@ -37,7 +37,7 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
       await authApiRequest.auth({
         sessionToken: res.result.access_token
       })
-      router.push('/dashboard')
+      router.push('/')
       toast.success(res.message || 'Login successfully')
     } catch (e: any) {
       toast.error(e.message)

@@ -14,27 +14,21 @@ const Menuitems = [
   },
   {
     id: uniqueId(),
-    title: 'Home Page',
-    icon: IconLayoutDashboard,
-    href: '/dashboard'
-  },
-  {
-    id: uniqueId(),
     title: 'User Management',
     icon: IconUser,
-    href: '/dashboard/user-management'
+    href: '/user-management'
   },
   {
     id: uniqueId(),
     title: 'Role Management',
     icon: IconShieldLock,
-    href: '/dashboard/role-management'
+    href: '/role-management'
   },
   {
     id: uniqueId(),
     title: 'File Management',
     icon: IconFile,
-    href: '/dashboard/file-management'
+    href: '/file-management'
   },
 ]
 

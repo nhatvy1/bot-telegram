@@ -1,19 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const privatePaths = ['/dashboard']
+const privatePaths = [
+  '/',
+  '/user-management',
+  '/role-management',
+  '/file-management'
+]
+
 const authPaths = ['/login', '/register']
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const sessionToken = request.cookies.get('sessionToken')?.value
+  const isPrivatePath = privatePaths.includes(pathname)
 
-  // Once logged in, you will no longer be allowed to access the login or registration page
-  if (authPaths.some((path) => pathname.startsWith(path)) && sessionToken) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
-  }
-
-  // If you are not logged in, you will not be allowed into private paths
-  if (privatePaths.some((path) => pathname.startsWith(path)) && !sessionToken) {
+  if(sessionToken && (pathname === '/login' || pathname === '/register')) {
+    return NextResponse.redirect(new URL('/', request.url))
+  } else if (!sessionToken && isPrivatePath) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
@@ -21,5 +24,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/login', '/dashboard']
+  matcher: ['/login', ...privatePaths]
 }

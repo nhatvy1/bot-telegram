@@ -152,6 +152,9 @@ const TableUser = ({ listUsers }: Props) => {
             borderRadius: '8px',
             background: theme.palette.primary.main,
             color: 'white',
+            '&.MuiButton-root:hover': {
+              background: '#3399FF'
+            }
           }}
         >
           Add new user

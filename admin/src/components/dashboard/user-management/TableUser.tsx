@@ -151,7 +151,7 @@ const TableUser = ({ listUsers }: Props) => {
             border: '1px solid lightgray',
             borderRadius: '8px',
             background: theme.palette.primary.main,
-            color: 'white'
+            color: 'white',
           }}
         >
           Add new user

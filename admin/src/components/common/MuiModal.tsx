@@ -34,7 +34,12 @@ const MuiModal = ({ open, closeModal, title, children, className }: Props) => {
     >
       <Box sx={{ ...style, ...className }}>
         {title && (
-          <Typography id='modal-modal-title' variant='h6' component='h2'>
+          <Typography
+            id='modal-modal-title'
+            variant='h6'
+            component='h2'
+            sx={{ marginBottom: 2 }}
+          >
             {title}
           </Typography>
         )}

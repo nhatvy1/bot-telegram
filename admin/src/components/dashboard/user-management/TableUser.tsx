@@ -23,6 +23,7 @@ import {
 } from '@/theme/common.styles'
 import Search from './Search'
 import { useTheme } from '@mui/material'
+import AddUpdateUser from './AddUpdateUser'
 
 interface Props {
   listUsers: IUser[]
@@ -34,18 +35,24 @@ const TableUser = ({ listUsers }: Props) => {
   const [openUpdate, setOpenUpdate] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
 
+  const [user, setUser] = useState<IUser | null>(null)
+
   const handleCloseModal = () => {
     setOpenUpdate(false)
     setOpenDelete(false)
+    setUser(null)
   }
 
   const handleOpenDelete = () => {
     setOpenDelete(true)
   }
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (user: IUser) => {
     setOpenUpdate(true)
+    setUser(user)
   }
+
+  console.log('re-render cha')
 
   const columns: GridColDef[] = [
     {
@@ -126,7 +133,7 @@ const TableUser = ({ listUsers }: Props) => {
             }}
           >
             <Tooltip title='Edit user'>
-              <Button onClick={() => handleOpenModal()}>
+              <Button onClick={() => handleOpenModal(row)}>
                 <IconEdit />
               </Button>
             </Tooltip>
@@ -145,7 +152,7 @@ const TableUser = ({ listUsers }: Props) => {
     <Box>
       <Box sx={{ ...flexCenter, gap: 2 }}>
         <Search />
-        <Button
+        {/* <Button
           sx={{
             p: '12px 20px',
             border: '1px solid lightgray',
@@ -156,21 +163,20 @@ const TableUser = ({ listUsers }: Props) => {
               background: '#3399FF'
             }
           }}
+          onClick={()=> setOpenUpdate(true)}
         >
           Add new user
-        </Button>
+        </Button> */}
       </Box>
       <MuiTable listUsers={listUsers} columns={columns} />
 
       <MuiPagination />
 
-      <MuiModal
+      <AddUpdateUser
         open={openUpdate}
         closeModal={handleCloseModal}
-        title='Cập nhật người dùng'
-      >
-        <Box>sdsadsadsa</Box>
-      </MuiModal>
+        user={user}
+      />
 
       <MuiModal
         open={openDelete}

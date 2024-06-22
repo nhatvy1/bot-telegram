@@ -14,3 +14,7 @@ interface IResListUsers extends IResponseType {
     page: number
   }
 }
+
+interface IResUpdateUser extends IResponseType {
+  number: number
+}

@@ -6,6 +6,8 @@ import Box from '@mui/material/Box'
 const UserManagement = async () => {
   const data = await getUser()
 
+  console.log(data?.result?.result)
+
   return (
     <Box sx={{ width: '100%' }}>
       <title>User Management</title>

@@ -30,8 +30,6 @@ interface Props {
 }
 
 const TableUser = ({ listUsers }: Props) => {
-  const theme = useTheme()
-
   const [openUpdate, setOpenUpdate] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
 
@@ -51,8 +49,6 @@ const TableUser = ({ listUsers }: Props) => {
     setOpenUpdate(true)
     setUser(user)
   }
-
-  console.log('re-render cha')
 
   const columns: GridColDef[] = [
     {
@@ -152,21 +148,6 @@ const TableUser = ({ listUsers }: Props) => {
     <Box>
       <Box sx={{ ...flexCenter, gap: 2 }}>
         <Search />
-        {/* <Button
-          sx={{
-            p: '12px 20px',
-            border: '1px solid lightgray',
-            borderRadius: '8px',
-            background: theme.palette.primary.main,
-            color: 'white',
-            '&.MuiButton-root:hover': {
-              background: '#3399FF'
-            }
-          }}
-          onClick={()=> setOpenUpdate(true)}
-        >
-          Add new user
-        </Button> */}
       </Box>
       <MuiTable listUsers={listUsers} columns={columns} />
 

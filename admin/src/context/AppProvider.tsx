@@ -1,22 +1,23 @@
 'use client'
-import { clientSessionToken } from '@/utils/http'
-import { ReactNode, useState } from 'react'
+import { clientSessionToken } from "@/utils/http"
+import { ReactNode, useState } from "react"
 
-const AppProvider = ({
-  children,
-  initialSessionToken = ''
-}: {
+interface Props {
   children: ReactNode
-  initialSessionToken?: string
-}) => {
-  useState(() => {
-    if (typeof window !== 'undefined') {
-      clientSessionToken.value = initialSessionToken
+  initialToken?: string
+}
+
+const AppProvider = ({ children, initialToken = '' }: Props)=> {
+
+  useState(()=> {
+    if(typeof window !== undefined) {
+      clientSessionToken.value = initialToken
     }
   })
 
-  return <>{children}</>
+  return (
+    <>{children}</>
+  )
 }
 
 export default AppProvider
-

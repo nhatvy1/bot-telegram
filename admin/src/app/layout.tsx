@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <MuiProvider>
-          <AppProvider initialSessionToken={sessionToken?.value}>
+          <AppProvider initialToken={sessionToken?.value}>
             {children}
             <ToastContainer
               position='top-right'

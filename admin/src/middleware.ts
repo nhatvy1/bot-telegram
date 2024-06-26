@@ -4,7 +4,8 @@ const privatePaths = [
   '/',
   '/user-management',
   '/role-management',
-  '/file-management'
+  '/file-management',
+  '/profile'
 ]
 
 const authPaths = ['/login', '/register']

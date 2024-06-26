@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, forwardRef } from 'react'
 import { styled } from '@mui/material/styles'
-import { TextField } from '@mui/material';
+import { TextField } from '@mui/material'
 
 const CustomTextField = styled((props: any) => <TextField {...props} />)(
   ({ theme }) => ({

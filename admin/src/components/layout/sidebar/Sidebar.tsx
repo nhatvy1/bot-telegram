@@ -1,42 +1,42 @@
-import { useMediaQuery, Box, Drawer } from "@mui/material";
-import Logo from "../shared/logo/Logo";
-import SidebarItems from "./SidebarItems";
+import { useMediaQuery, Box, Drawer } from '@mui/material'
+import Logo from '../shared/logo/Logo'
+import SidebarItems from './SidebarItems'
 
 interface ItemType {
-  isMobileSidebarOpen: boolean;
-  onSidebarClose: (event: React.MouseEvent<HTMLElement>) => void;
-  isSidebarOpen: boolean;
+  isMobileSidebarOpen: boolean
+  onSidebarClose: (event: React.MouseEvent<HTMLElement>) => void
+  isSidebarOpen: boolean
 }
 
 const Sidebar = ({
   isMobileSidebarOpen,
   onSidebarClose,
-  isSidebarOpen,
+  isSidebarOpen
 }: ItemType) => {
-  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up("lg"));
+  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'))
 
-  const sidebarWidth = "270px";
+  const sidebarWidth = '270px'
 
   if (lgUp) {
     return (
       <Box
         sx={{
           width: sidebarWidth,
-          flexShrink: 0,
+          flexShrink: 0
         }}
       >
         {/* ------------------------------------------- */}
         {/* Sidebar for desktop */}
         {/* ------------------------------------------- */}
         <Drawer
-          anchor="left"
+          anchor='left'
           open={isSidebarOpen}
-          variant="permanent"
+          variant='permanent'
           PaperProps={{
             sx: {
               width: sidebarWidth,
-              boxSizing: "border-box",
-            },
+              boxSizing: 'border-box'
+            }
           }}
         >
           {/* ------------------------------------------- */}
@@ -44,7 +44,7 @@ const Sidebar = ({
           {/* ------------------------------------------- */}
           <Box
             sx={{
-              height: "100%",
+              height: '100%'
             }}
           >
             {/* ------------------------------------------- */}
@@ -62,20 +62,20 @@ const Sidebar = ({
           </Box>
         </Drawer>
       </Box>
-    );
+    )
   }
 
   return (
     <Drawer
-      anchor="left"
+      anchor='left'
       open={isMobileSidebarOpen}
       onClose={onSidebarClose}
-      variant="temporary"
+      variant='temporary'
       PaperProps={{
         sx: {
           width: sidebarWidth,
-          boxShadow: (theme) => theme.shadows[8],
-        },
+          boxShadow: (theme) => theme.shadows[8]
+        }
       }}
     >
       {/* ------------------------------------------- */}
@@ -89,7 +89,7 @@ const Sidebar = ({
       {/* ------------------------------------------- */}
       <SidebarItems />
     </Drawer>
-  );
-};
+  )
+}
 
-export default Sidebar;
+export default Sidebar

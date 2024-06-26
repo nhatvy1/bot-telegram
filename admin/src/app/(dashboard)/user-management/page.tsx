@@ -1,6 +1,5 @@
 import { getUser } from '@/app/actions/user'
 import TableUser from '@/components/dashboard/user-management/TableUser'
-import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
 
 const UserManagement = async () => {
